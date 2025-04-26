@@ -1,0 +1,8 @@
+tradingview (Connect to Third-Party Applications)
+API: usFca5dQp6zKa0O4hl
+Secret: FY4sCCWw7bXqcofpksWn62TOmC0Nvyrbu8xx
+
+apo (API Transaction)
+API: nplb7ruTPUuDWFiJO3
+API Secret: gmYmHyV7SIlwpWkkbluWR2coUpkDvqqannBn
+

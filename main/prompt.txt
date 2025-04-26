@@ -1,0 +1,292 @@
+Arbeitsanweisung für Claude 3.7: Entwicklung eines Daytrading-Bots für Bybit mit Leverage
+Ich benötige Unterstützung bei der Entwicklung eines automatisierten Daytrading-Bots für die Krypto-Börse Bybit.com, der mit Leverage (Hebel) arbeitet und rein chartbasiert handelt.
+
+Du hast bereits angefangen, jedoch ist der Fortschritt aktuell ins Stocken geraten. Bitte nimm diesen Prompt als vollständige Aufgabenbeschreibung zur Weiterentwicklung.
+
+Inspiration oder bereits funktionierende Beispiele findest du hier: 📁 C:\Users\Doktor\Desktop\Bybit\tradingbot
+
+🎯 Ziel
+Erstelle einen modular aufgebauten Trading-Bot, der:
+
+mit der offiziellen Bybit-API arbeitet (Unified Trading Account, Derivatives/Futures)
+
+auf Basis technischer Indikatoren automatisierte Short-/Long-Trades tätigt
+
+konfigurierbares Leverage (z. B. 3x, 5x, 10x) unterstützt
+
+Strategien wie Scalping oder Daytrading umsetzt
+
+🔧 Technische Anforderungen
+Sprache: Python (alternativ Node.js nur auf begründete Empfehlung)
+API: Offizielle Bybit-REST-API & WebSockets
+Trading-Paar: BTC/USDT (Standard)
+Positionsarten: Market, Limit, Conditional
+Leverage: Konfigurierbar pro Trade (1x–10x)
+Plattform: Futures/Derivatives (nicht Spot)
+
+🔐 Sicherheit & Konfiguration
+Sichere Anbindung an Bybit-API (Key + Secret getrennt speicherbar, z. B. .env)
+
+Nur Handel, kein Zugriff auf Auszahlungen!
+
+Paper-Trading-Modus zur Simulation
+
+Konfigurationsdatei (z. B. config.json) für:
+
+API-Zugangsdaten
+
+Tradingpaar
+
+Hebel
+
+Risiko-Parameter
+
+📈 Trading-Strategie (Chartbasiert)
+Bitte implementiere mind. zwei der folgenden Indikatoren:
+
+RSI
+
+Bollinger Bands
+
+MACD
+
+EMA/SMA
+
+Die Signale sollen nach festen, nachvollziehbaren Regeln verarbeitet werden. Beispiel:
+
+RSI < 30 = Kaufsignal
+
+EMA200 > Kurs > EMA50 = Bullenphase
+
+MACD-Kreuzung als Einstiegssignal
+
+Zusätzlich:
+
+Unterstützung für Stop-Loss, Take-Profit
+
+Optional: Trailing-Stop
+
+Post-Only und Reduce-Only-Flags implementieren
+
+Hebel als Parameter (dynamisch oder fix)
+
+📊 Risikomanagement
+Konfigurierbares max. Risiko pro Trade (z. B. 1 % des Kapitals)
+
+Überwachung des Liquidationspreises
+
+Sicherheitsfunktionen:
+
+Stop nach X Verlusten in Folge
+
+Stop bei starker Volatilität
+
+Stop bei Kapitalverlust unter Grenzwert
+
+📰 Einschränkungen
+Keine Nachrichtenanalyse
+
+Kein Einfluss durch Politik, YouTube, Social Media oder Newsfeeds
+
+Rein technische Analyse
+
+🧪 Erweiterungen (Optional, Bonus)
+Backtesting-Modul (basierend auf historischen Candle-Daten)
+
+CLI-Menü zur Steuerung
+
+Einfaches Web-Dashboard (nur falls sinnvoll)
+
+Telegram/Discord-Benachrichtigungen bei Entry/Exit
+
+📦 Projektausgabe (Struktur)
+Bitte erstelle eine klare, wartbare Struktur:
+
+bash
+Kopieren
+Bearbeiten
+bybit_tradingbot/
+├── main.py                  # Einstiegspunkt
+├── config.json              # Konfiguration
+├── /api/                    # Anbindung an Bybit API
+│   └── bybit_api.py
+├── /strategy/              # Strategiemodule
+│   └── strategy_rsi_macd.py
+├── /risk/                  # Risikomanagement
+│   └── risk_manager.py
+├── /utils/                 # Tools, Logger, Formatter
+│   └── logger.py
+├── /data/                  # Speicherung, Logging, Backtestdaten
+└── requirements.txt
+💬 Hinweise
+Kommentiere alle Module sauber und verständlich
+
+Verwende nach Möglichkeit asyncio für WebSocket-Handling (nur, wenn sinnvoll)
+
+Falls du bestehende Open-Source-Strategien als Grundlage nutzt, gib Quelle an
+
+Der Code muss so aufgebaut sein, dass ich später eigene Strategien oder Indikatoren leicht ergänzen kann
+
+Wenn du bereit bist, beginne mit dem Modul bybit_api.py oder der Strategie strategy_rsi_macd.py – je nachdem, was du als nächsten logischen Schritt siehst.
+
+Ich erwarte eine strukturierte und ausbaufähige Lösung, keinen Monolithen.
+
+Möchtest du, dass ich daraus direkt eine Markdown-Datei oder Projekt-Readme erstelle?
+
+
+
+
+
+
+
+Du:
+claude 3.7 hat mein gesamtes script verkackt. Dort sin 2100 Probleme drinnen und das lässt sich nicht starten außerdem soll nicht nur auf BTC und ETH gesetzt werden sondern auf alle verfügbaren.
+
+
+ChatGPT:
+Gespeicherte Erinnerung aktualisiert
+Okay, danke für die Info! Dann sollten wir den Prompt und das Script entsprechend anpassen, damit:
+
+Alle handelbaren Tradingpaare automatisch
+
+
+
+
+
+
+
+Du:
+Erweitere mir den Prompt
+
+
+ChatGPT:
+Natürlich! Hier ist dein erweiterter und verfeinerter Prompt, der berücksichtigt, dass der Bot nicht nur BTC und ETH, sondern alle auf Bybit verfügbaren Coins automatisch erkennen und handeln soll – sauber integriert in das bestehende Strukturkonzept:
+
+📌 Arbeitsanweisung für Claude 3.7 (erweitert)
+Ich entwickle einen Daytrading-Bot für die Krypto-Börse Bybit.com, der mit Hebel (Leverage) arbeitet und rein chartbasiert automatisiert handelt.
+
+⚠️ Wichtiger Hinweis:
+Ein früheres Script ist unbrauchbar geworden (über 2100 Fehler). Bitte nicht auf vorherigen Code aufbauen, sondern eine saubere, neue Lösung erstellen.
+
+🎯 Ziel
+Ein Trading-Bot, der:
+
+auf alle handelbaren Coins und Paare auf Bybit dynamisch zugreift
+
+mit konfigurierbarem Hebel handelt (z. B. 1x bis 10x)
+
+automatisiert Long-/Short-Positionen eröffnet und schließt
+
+technische Analyse nutzt (Scalping/Daytrading)
+
+🔧 Technische Spezifikation
+Sprache: Python (bevorzugt, alternativ Node.js nur mit guter Begründung)
+
+API: Offizielle Bybit-API (REST + WebSocket)
+
+Plattform: Unified Trading Account, Derivatives/Futures
+
+Leverage: Dynamisch einstellbar (pro Pair oder global)
+
+Trading-Paare: Alle unterstützten Coins (nicht nur BTC/ETH)
+
+📡 Automatische Symbol-Erkennung
+Der Bot soll automatisch:
+
+alle verfügbaren Futures-Märkte mit USDT ermitteln (z. B. BTC/USDT, DOGE/USDT, etc.)
+
+alle diese Märkte regelmäßig aktualisieren (z. B. via REST /v5/market/instruments)
+
+ungeeignete Märkte (z. B. illiquide, extrem volatile) optional filtern können
+
+🔐 Sicherheit & Konfiguration
+API-Zugang über .env-Datei (nie im Klartext)
+
+Kein Zugriff auf Auszahlungen, nur Handel
+
+Konfigurierbare Parameter wie:
+
+Leverage (pro Symbol oder global)
+
+Max. Risiko/Trade (%)
+
+Stop-Loss, Take-Profit, Trailing-Stop
+
+Max. Anzahl paralleler Positionen
+
+Whitelist/Blacklist für Coins
+
+📈 Trading-Strategie (rein chartbasiert)
+Der Bot soll auf technische Indikatoren reagieren:
+
+RSI
+
+MACD
+
+Bollinger Bands
+
+EMA/SMA
+
+Volumenanalyse (optional)
+
+Er soll:
+
+nach festen Regeln ein- und aussteigen
+
+nur Market, Limit und Conditional Orders verwenden
+
+optional: Trailing-Stop, Post-Only, Reduce-Only
+
+📊 Risikomanagement
+Max. Risiko pro Trade (z. B. 1–3 % Kapital)
+
+Liquidationspreis permanent im Auge behalten
+
+Notbremse bei:
+
+X Verlusten in Folge
+
+Volatilitäts-Alarm
+
+zu wenig Margin
+
+Logging aller Aktionen (Trades, Errors, API Calls) in CSV/JSON/SQLite
+
+🧪 Extras (optional)
+Backtesting-Modul
+
+Paper-Trading-Modus
+
+Simples Web-UI oder CLI
+
+Telegram- oder Discord-Benachrichtigung
+
+Visuelles Monitoring-Dashboard
+
+🔁 Struktur (Modular)
+plaintext
+Kopieren
+Bearbeiten
+bybit_tradingbot/
+├── main.py
+├── config.json
+├── .env
+├── /api/                  # API-Kommunikation (REST/WebSocket)
+│   └── bybit_api.py
+├── /symbols/              # Marktanalyse & Symbol-Management
+│   └── market_fetcher.py
+├── /strategy/             # TA-Strategien
+│   └── strategy_rsi_macd.py
+├── /risk/                 # Risikoanalyse & Positionssizing
+│   └── risk_manager.py
+├── /utils/                # Logging, Fehler, Zeitsteuerung
+│   └── logger.py
+└── requirements.txt
+🛑 Einschränkungen
+Kein News-Trading
+
+Kein Machine Learning
+
+Keine Politik-, YouTube-, oder Social-Media-Auswertung
+
+Kein menschliches Bauchgefühl – nur Charts

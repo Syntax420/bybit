@@ -1,0 +1,50 @@
+{
+    "general": {
+        "paper_trading": true,
+        "log_level": "INFO"
+    },
+    "api": {
+        "testnet": true,
+        "api_key": "nplb7ruTPUuDWFiJO3",
+        "api_secret": "gmYmHyV7SIlwpWkkbluWR2coUpkDvqqannBn"
+    },
+    "trading": {
+        "default_leverage": 3,
+        "max_positions": 20,
+        "default_risk_percent": 1.0,
+        "stop_loss_percent": 2.0,
+        "take_profit_percent": 3.0,
+        "use_trailing_stop": true,
+        "trading_interval": "1m",
+        "symbols": {
+            "whitelist": [],
+            "blacklist": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "DOGEUSDT", "BNBUSDT"]
+        }
+    },
+    "strategy": {
+        "active": "rsi_macd",
+        "parameters": {
+            "rsi_macd": {
+                "rsi_period": 14,
+                "rsi_overbought": 70,
+                "rsi_oversold": 30,
+                "macd_fast": 12,
+                "macd_slow": 26,
+                "macd_signal": 9,
+                "ema_short": 9,
+                "ema_long": 21
+            }
+        }
+    },
+    "risk_management": {
+        "max_consecutive_losses": 3,
+        "max_daily_loss_percent": 50.0,
+        "max_open_positions": 10,
+        "min_account_balance": 0
+    },
+    "notifications": {
+        "enable_telegram": false,
+        "telegram_token": "",
+        "telegram_chat_id": ""
+    }
+} 
